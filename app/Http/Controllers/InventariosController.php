@@ -35,8 +35,8 @@ class InventariosController extends Controller
             $stock = $request->stock;
             $estado = $request->estado;
             $cantidad = $request->cantidad;
-            $fecha = $request->fecha;
-            $hora = $request->hora;
+            $fecha = date('Y-d-m');
+            $hora = date('H:i');
             $usuario = $request->usuario;
             $producto_venta = $request->producto_venta;
             $producto_ecommerce = $request->producto_ecommerce;
@@ -87,7 +87,6 @@ class InventariosController extends Controller
             $codigo_barras = $request->codigo_barras;
             $nombre = $request->nombre;
             $medida = $request->medida;
-            $precio = $request->precio;
             $costo_proveedor = $request->costo_proveedor;
             $moneda = $request->moneda;
             $descripcion = $request->descripcion;
