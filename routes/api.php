@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\InventariosController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::controller(InventariosController::class)->group(function () {
+    Route::get('getProductos', 'getProductos');  // para mostrar o consultar datos
+    //Route::post('countPatients', 'countPatients'); // para guardar datos
+    Route::get('getCategorias', 'getCategorias');
+    Route::post('postAgregarProductos', 'postAgregarProductos');
+});
+

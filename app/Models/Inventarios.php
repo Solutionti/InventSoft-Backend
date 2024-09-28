@@ -79,4 +79,28 @@ class Inventarios extends Model
             ->where('codigo', $codigo)
             ->update($producto);
     }
+
+    public function getCategorias(){
+        $categoria = DB::table('categorias')
+                        ->select('*')
+                        ->get();
+
+        return $categoria;
+    }
+
+    public function postAgregarProductos($request){
+        $producto = [
+            "categoria" => $request['categoria'],
+            "nombre" => $request['nombre'],
+            "codigo" => $request['codigo'],
+            "codigo_barras" => $request['codigo_barras'],
+            "medida" => $request['medida'],
+            "cantidad" => $request['cantidad'],
+            "precio" => $request['precio'],
+            "moneda" => $request['moneda'],
+            "descripcion" => $request['descripcion'],
+        ];
+        DB::table('productos')
+           ->insert($producto);
+    }
 }

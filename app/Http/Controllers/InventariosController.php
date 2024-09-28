@@ -12,7 +12,13 @@ class InventariosController extends Controller
       }
     //
     public function getProductos(){
+
         return $this->Inventarios->getProductos();
+    }
+
+    public function getCategorias(){
+
+        return $this->Inventarios->getCategorias();
     }
 
     public function getProductosId(Request $request){
@@ -126,6 +132,44 @@ class InventariosController extends Controller
 
             return response()->json([
                 'message' => 'La ecografia genetica se ha creado en la base de datos',
+                'status' => 200
+              ]);
+        }
+        catch(\exception $e){
+            return response()->json([
+                'status' => 400,
+                'message' => $e->getMessage()
+              ]);
+        }
+    }
+
+    public function postAgregarProductos(Request $request){
+        try{
+            $categoria = $request->categoria;
+            $nombre = $request->nombre;
+            $codigo = $request->codigo;
+            $codigo_barras = $request->codigo_barras;
+            $medida = $request->medida;
+            $cantidad = $request->cantidad;
+            $precio = $request->precio;
+            $moneda = $request->moneda;
+            $descripcion = $request->descripcion;
+
+            $producto = [
+                "categoria" => $categoria,
+                "nombre" => $nombre,
+                "codigo" => $codigo,
+                "codigo_barras" => $codigo_barras,
+                "medida" => $medida,
+                "cantidad" => $cantidad,
+                "precio" => $precio,
+                "moneda" => $moneda,
+                "descripcion" => $descripcion,
+            ];
+            $this->Inventarios->postAgregarProductos($producto);
+
+            return response()->json([
+                'message' => 'El producto se ha creado en la base de datos',
                 'status' => 200
               ]);
         }
