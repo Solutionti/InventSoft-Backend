@@ -90,15 +90,25 @@ class Inventarios extends Model
 
     public function postAgregarProductos($request){
         $producto = [
+            "url_imagen" => $request['url_imagen'],
             "categoria" => $request['categoria'],
-            "nombre" => $request['nombre'],
             "codigo" => $request['codigo'],
             "codigo_barras" => $request['codigo_barras'],
+            "nombre" => $request['nombre'],
             "medida" => $request['medida'],
-            "cantidad" => $request['cantidad'],
             "precio" => $request['precio'],
+            "costo_proveedor" => $request['costo_proveedor'],
             "moneda" => $request['moneda'],
             "descripcion" => $request['descripcion'],
+            "stock" => $request['stock'],
+            "estado" => $request['estado'],
+            "cantidad" => $request['cantidad'],
+            "fecha" => $request['fecha'],
+            "hora" => $request['hora'],
+            "usuario" => $request['usuario'],
+            "producto_venta" => $request['producto_venta'],
+            "producto_ecommerce" => $request['producto_ecommerce'],
+            "merma" => $request['merma'],
         ];
         DB::table('productos')
            ->insert($producto);
