@@ -161,7 +161,7 @@ class InventariosController extends Controller
             $fecha = date("Y-m-d");
             $hora = date("H:i");
             $usuario = $request->usuario;
-            $producto_venta = $request->producto_venta;
+            $producto_venta = 0;
             $producto_ecommerce = $request->producto_ecommerce;
             $merma = 0;
 

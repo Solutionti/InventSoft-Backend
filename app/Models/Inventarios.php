@@ -92,7 +92,7 @@ class Inventarios extends Model
         $producto = [
             "url_imagen" => $request['url_imagen'],
             "categoria" => $request['categoria'],
-            "codigo" => $request['codigo'],
+            "codigo" => $request['codigo_barras'],
             "codigo_barras" => $request['codigo_barras'],
             "nombre" => $request['nombre'],
             "medida" => $request['medida'],
