@@ -21,6 +21,11 @@ class InventariosController extends Controller
         return $this->Inventarios->getCategorias();
     }
 
+    public function getProductoKardex(){
+
+        return $this->Inventarios->getProductoKardex();
+    }
+
     public function getProductosId(Request $request){
         $codigo = $request->codigo;
         return $this->Inventarios->getProductosId($codigo);
@@ -201,4 +206,60 @@ class InventariosController extends Controller
               ]);
         }
     }
+
+    public function entradaKardex(Request $request){
+        try {
+            $id_producto = $request->producto_entrada;
+            $tp_documento = $request->tp_documento;
+            $entrada = $request->cantidad_entrada;
+            $salida = $request->salida;
+            $devolucion = "0";
+            $fecha = date('Y-m-d');
+            $hora = date('h:i');
+            $descripcion = $request->comentarios_entrada;
+            $usuario = $request->usuario;
+            $sede = "001";
+            $motivo = "Compra";
+            $saldo = $request->saldo;
+
+            $entradaa = [
+                "id_producto" => $id_producto,
+                "tp_documento" => "NE",
+                "entrada" => $entrada,
+                "salida" => 0,
+                "devolucion" => $devolucion,
+                "fecha" => $fecha,
+                "hora" => $hora,
+                "descripcion" => $descripcion,
+                "usuario" => $usuario,
+                "sede" => $sede,
+                "motivo" => $motivo,
+                "saldo" => 0,
+            ];
+            $this->Inventarios->entradaKardex($entradaa);
+
+            return response()->json([
+                'message' => 'la Entrada se ha creado en la base de datos',
+                'status' => 200
+              ]);
+        }
+        catch(\exception $e){
+            return response()->json([
+                'status' => 400,
+                'message' => $e->getMessage()
+              ]);
+        }
+    }
+
+    public function getProductoStock(Request $request ) {
+      $codigo = $request->codigo;
+
+      return $this->Inventarios->getProductoStock($codigo);
+    }
+
+
+
+
+
+
 }

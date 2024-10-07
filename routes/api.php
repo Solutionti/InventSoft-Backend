@@ -24,6 +24,13 @@ Route::controller(InventariosController::class)->group(function () {
     Route::get('getProductos', 'getProductos');  // para mostrar o consultar datos
     //Route::post('countPatients', 'countPatients'); // para guardar datos
     Route::get('getCategorias', 'getCategorias');
+    Route::get('getProductoKardex', 'getProductoKardex');
+
     Route::post('postAgregarProductos', 'postAgregarProductos');
+    Route::post('entradaKardex', 'entradaKardex');
+
+    Route::get('getProductoStock', 'getProductoStock');
+
+
 });
 

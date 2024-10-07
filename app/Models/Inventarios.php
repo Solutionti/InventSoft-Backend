@@ -27,6 +27,22 @@ class Inventarios extends Model
         return $productos;
     }
 
+    public function getCategorias(){
+        $categoria = DB::table('categorias')
+        ->select('*')
+        ->get();
+
+        return $categoria;
+    }
+
+    public function getProductoKardex(){
+        $producto = DB::table('kardex')
+                       ->select('*')
+                       ->get();
+
+        return $producto;
+    }
+
     public function insertProductos($request){
         $producto = [
             "url_imagen" => $request['url_imagen'],
@@ -51,7 +67,7 @@ class Inventarios extends Model
         ];
         DB::table('productos')
             ->insert($producto);
-    }
+        }
 
     public function updateProducto($codigo){
         $producto = [
@@ -80,14 +96,6 @@ class Inventarios extends Model
             ->update($producto);
     }
 
-    public function getCategorias(){
-        $categoria = DB::table('categorias')
-                        ->select('*')
-                        ->get();
-
-        return $categoria;
-    }
-
     public function postAgregarProductos($request){
         $producto = [
             "url_imagen" => $request['url_imagen'],
@@ -112,5 +120,33 @@ class Inventarios extends Model
         ];
         DB::table('productos')
            ->insert($producto);
+    }
+
+    public function entradaKardex($request){
+        $kardex = [
+            "id_producto" => $request['id_producto'],
+            "tp_documento" => $request['tp_documento'],
+            "entrada" => $request['entrada'],
+            "salida" => $request['salida'],
+            "devolucion" => $request['devolucion'],
+            "fecha" => $request['fecha'],
+            "hora" => $request['hora'],
+            "descripcion" => $request['descripcion'],
+            "usuario" => $request['usuario'],
+            "sede" => $request['sede'],
+            "motivo" => $request['motivo'],
+            "saldo" => $request['saldo'],
+        ];
+        DB::table('kardex')
+           ->insert($kardex);
+    }
+
+    public function getProductoStock($codigo) {
+      $stock = DB::table("productos")
+                  ->select("stock")
+                  ->where("codigo_producto", $codigo)
+                  ->first();
+
+      return $stock;
     }
 }
