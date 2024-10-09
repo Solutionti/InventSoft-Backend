@@ -28,8 +28,12 @@ Route::controller(InventariosController::class)->group(function () {
 
     Route::post('postAgregarProductos', 'postAgregarProductos');
     Route::post('entradaKardex', 'entradaKardex');
+    Route::post('salidakardex', 'salidakardex');
 
     Route::get('getProductoStock', 'getProductoStock');
+    Route::get('getProductStock', 'getProductStock');
+
+
 
 
 });

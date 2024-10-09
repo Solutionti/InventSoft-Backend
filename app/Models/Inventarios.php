@@ -149,4 +149,32 @@ class Inventarios extends Model
 
       return $stock;
     }
+
+    public function getProductStock($codigo) {
+        $stock = DB::table("productos")
+                    ->select("stock")
+                    ->where("codigo_producto", $codigo)
+                    ->first();
+
+        return $stock;
+      }
+
+      public function salidakardex($request){
+        $kardex = [
+            "id_producto" => $request['id_producto'],
+            "tp_documento" => $request['tp_documento'],
+            "entrada" => $request['entrada'],
+            "salida" => $request['salida'],
+            "devolucion" => $request['devolucion'],
+            "fecha" => $request['fecha'],
+            "hora" => $request['hora'],
+            "descripcion" => $request['descripcion'],
+            "usuario" => $request['usuario'],
+            "sede" => $request['sede'],
+            "motivo" => $request['motivo'],
+            "saldo" => $request['saldo']
+        ];
+        DB::table('kardex')
+           ->insert($kardex);
+      }
 }

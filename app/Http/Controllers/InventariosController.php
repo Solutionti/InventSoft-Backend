@@ -257,8 +257,55 @@ class InventariosController extends Controller
       return $this->Inventarios->getProductoStock($codigo);
     }
 
+    public function getProductStock(Request $request ) {
+        $codigo = $request->codigo;
 
+        return $this->Inventarios->getProductStock($codigo);
+      }
 
+      public function salidakardex(Request $request){
+        try{
+            $id_producto = $request->id_producto;
+            $tp_documento = 'NE';
+            $entrada = $request->entrada;
+            $salida = $request->salida;
+            $devolucion = '0';
+            $fecha = date('Y-m-d');
+            $hora = date('H:i');
+            $descripcion = $request->descripcion;
+            $usuario = $request->usuario;
+            $sede = '001';
+            $motivo = 'Gasto';
+            $saldo = $request->saldo;
+
+            $kardex = [
+                "id_producto" => $id_producto,
+                "tp_documento" => $tp_documento,
+                "entrada" => 0,
+                "salida" => $salida,
+                "devolucion" => $devolucion,
+                "fecha" => $fecha,
+                "hora" => $hora,
+                "descripcion" => $descripcion,
+                "usuario" => $usuario,
+                "sede" => $sede,
+                "motivo" => $motivo,
+                "saldo" => 0,
+            ];
+            $this->Inventarios->salidakardex($kardex);
+
+            return response()->json([
+                'message' => 'la salida se ha creado en la base de datos',
+                'status' => 200
+              ]);
+        }
+        catch(\exception $e){
+            return response()->json([
+                'status' => 400,
+                'message' => $e->getMessage()
+              ]);
+        }
+      }
 
 
 
