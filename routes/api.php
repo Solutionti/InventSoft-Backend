@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\InventariosController;
+use App\Http\Controllers\VentasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,16 +26,16 @@ Route::controller(InventariosController::class)->group(function () {
     //Route::post('countPatients', 'countPatients'); // para guardar datos
     Route::get('getCategorias', 'getCategorias');
     Route::get('getProductoKardex', 'getProductoKardex');
+    Route::get('getProductoStock', 'getProductoStock');
+    Route::get('getProductStock', 'getProductStock');
 
     Route::post('postAgregarProductos', 'postAgregarProductos');
     Route::post('entradaKardex', 'entradaKardex');
     Route::post('salidakardex', 'salidakardex');
+});
 
-    Route::get('getProductoStock', 'getProductoStock');
-    Route::get('getProductStock', 'getProductStock');
-
-
-
-
+Route::controller(VentasController::class)->group(function (){
+    //Ventas
+    Route::get('getPedido', 'getPedido');
 });
 
