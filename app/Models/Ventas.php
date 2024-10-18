@@ -16,4 +16,11 @@ class Ventas extends Model
                      ->get();
         return $pedido;
     }
+
+    public function getCompras(){
+        $compras = DB::table('gastos')
+                      ->Select('*')
+                      ->get();
+        return $compras;
+    }
 }

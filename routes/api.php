@@ -37,5 +37,7 @@ Route::controller(InventariosController::class)->group(function () {
 Route::controller(VentasController::class)->group(function (){
     //Ventas
     Route::get('getPedido', 'getPedido');
+    Route::get('getCompras', 'getCompras');
+
 });
 

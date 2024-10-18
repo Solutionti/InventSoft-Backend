@@ -17,4 +17,9 @@ class VentasController extends Controller
         return $this->Ventas->getPedido();
 
     }
+
+    public function getCompras(){
+
+        return $this->Ventas->getCompras();
+    }
 }
