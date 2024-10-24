@@ -39,5 +39,6 @@ Route::controller(VentasController::class)->group(function (){
     Route::get('getPedido', 'getPedido');
     Route::get('getCompras', 'getCompras');
 
+    Route::post('getComprasInsert', 'getComprasInsert');
 });
 

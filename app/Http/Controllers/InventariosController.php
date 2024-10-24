@@ -32,6 +32,7 @@ class InventariosController extends Controller
     }
 
     public function insertProducto(Request $request){
+
         try{
             $url_imagen = $request->url_imagen;
             $categoria = $request->categoria;
@@ -78,7 +79,7 @@ class InventariosController extends Controller
             $this->producto->insertProducto($producto);
 
             return response()->json([
-                'message' => 'La ecografia genetica se ha creado en la base de datos',
+                'message' => 'El producto se ha creado en la base de datos',
                 'status' => 200
               ]);
         }
@@ -149,8 +150,8 @@ class InventariosController extends Controller
     }
 
     public function postAgregarProductos(Request $request){
+
         try{
-            $url_imagen = $request->url_imagen;
             $categoria = $request->categoria;
             $codigo = $request->codigo;
             $codigo_barras = $request->codigo_barras;
@@ -170,8 +171,16 @@ class InventariosController extends Controller
             $producto_ecommerce = $request->producto_ecommerce;
             $merma = 0;
 
+            // IMAGEN 1
+            $imagen = $request->file("url_imagen");
+            $nombreimagen = $imagen->getClientOriginalName();
+            $ruta = public_path("productos/");
+            $rutacompleta = $codigo_barras.'-'.$nombreimagen;
+            copy($imagen->getRealPath(),$ruta.$rutacompleta);
+        // **************************************************
+
             $producto = [
-                "url_imagen" => $url_imagen,
+                "url_imagen" => $rutacompleta,
                 "categoria" => $categoria,
                 "codigo" => $codigo,
                 "codigo_barras" => $codigo_barras,

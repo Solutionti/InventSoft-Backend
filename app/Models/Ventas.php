@@ -23,4 +23,19 @@ class Ventas extends Model
                       ->get();
         return $compras;
     }
+
+    public function getComprasInsert($request){
+        $gastos = [
+            "categoria" => $request['categoria'],
+            "proveedor" => $request['proveedor'],
+            "fecha" => $request['fecha'],
+            "fecha_limite" => $request['fecha_limite'],
+            "descripcion" => $request['descripcion'],
+            "precio" => $request['precio'],
+            "usuario" => $request['usuario'],
+            "porpagar" => $request['porpagar'],
+        ];
+        DB::table('gastos')
+           ->insert($gastos);
+    }
 }
