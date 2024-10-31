@@ -177,4 +177,22 @@ class Inventarios extends Model
         DB::table('kardex')
            ->insert($kardex);
       }
+//esta funcion se utiliza para actualizar el stock del kardex
+      public function actualizarEstadoStock($stock, $codigo) {
+        $producto = [
+          "stock" => $stock
+        ];
+        DB::table("productos")
+            ->where("codigo_producto", $codigo)
+            ->update($producto);
+      }
+// esta funcion para no repetir codigos unicos de la tabla productos
+      public function validarExitenteProducto($codigo) {
+        $producto = DB::table("productos")
+                       ->select("*")
+                       ->where("codigo", $codigo)
+                       ->get();
+
+        return $producto;
+      }
 }

@@ -151,7 +151,7 @@ class InventariosController extends Controller
 
     public function postAgregarProductos(Request $request){
 
-        try{
+        try {
             $categoria = $request->categoria;
             $codigo = $request->codigo;
             $codigo_barras = $request->codigo_barras;
@@ -170,6 +170,12 @@ class InventariosController extends Controller
             $producto_venta = 0;
             $producto_ecommerce = $request->producto_ecommerce;
             $merma = 0;
+
+            $validar = $this->Inventarios->validarExitenteProducto($codigo_barras);
+
+            if(!$validar->isEmpty()) {
+             throw new \Exception('Ya existe un producto en la base de datos');
+            }
 
             // IMAGEN 1
             $imagen = $request->file("url_imagen");
@@ -219,7 +225,7 @@ class InventariosController extends Controller
     public function entradaKardex(Request $request){
         try {
             $id_producto = $request->producto_entrada;
-            $tp_documento = $request->tp_documento;
+            $tp_docento = $request->tp_documento;
             $entrada = $request->cantidad_entrada;
             $salida = $request->salida;
             $devolucion = "0";
@@ -230,6 +236,8 @@ class InventariosController extends Controller
             $sede = "001";
             $motivo = "Compra";
             $saldo = $request->saldo;
+            // varibale adicional de sumatoria de cantidad + stock
+            $stockact = $request->stockact;
 
             $entradaa = [
                 "id_producto" => $id_producto,
@@ -246,6 +254,7 @@ class InventariosController extends Controller
                 "saldo" => 0,
             ];
             $this->Inventarios->entradaKardex($entradaa);
+            $this->Inventarios->actualizarEstadoStock($stockact, $id_producto);
 
             return response()->json([
                 'message' => 'la Entrada se ha creado en la base de datos',
@@ -287,6 +296,9 @@ class InventariosController extends Controller
             $motivo = 'Gasto';
             $saldo = $request->saldo;
 
+            //crear variable actualizar dato
+            $stockActualizar = $request->stockActualizar;
+
             $kardex = [
                 "id_producto" => $id_producto,
                 "tp_documento" => $tp_documento,
@@ -302,6 +314,7 @@ class InventariosController extends Controller
                 "saldo" => 0,
             ];
             $this->Inventarios->salidakardex($kardex);
+            $this->Inventarios->actualizarEstadoStock($stockActualizar, $id_producto);
 
             return response()->json([
                 'message' => 'la salida se ha creado en la base de datos',
