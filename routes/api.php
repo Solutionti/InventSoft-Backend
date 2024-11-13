@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\InventariosController;
 use App\Http\Controllers\VentasController;
+use App\Http\Controllers\SeguridadController; //aca se pone el controlador que se va a utilizar
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,12 +35,17 @@ Route::controller(InventariosController::class)->group(function () {
     Route::post('entradaKardex', 'entradaKardex');
     Route::post('salidakardex', 'salidakardex');
 });
-
-Route::controller(VentasController::class)->group(function (){
     //Ventas
+    Route::controller(VentasController::class)->group(function (){
     Route::get('getPedido', 'getPedido');
     Route::get('getCompras', 'getCompras');
 
     Route::post('getComprasInsert', 'getComprasInsert');
+});
+    //seguridad
+    Route::controller(SeguridadController::class)->group(function (){
+    Route::get('getUsuarios', 'getUsuarios');
+
+
 });
 
